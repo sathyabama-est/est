@@ -892,8 +892,6 @@
                 <p>GPA = Σ (Credit × Grade Point) ÷ Σ Credits</p>
             </div>
 
-
-
             <div class="input-section">
                 <div class="input-group">
                     <label for="course-count">Number of Courses (1-8):</label>
@@ -997,7 +995,7 @@
         <div id="mark-calculator" class="calculator-container">
             <div class="card-header">
                 <i class="fas fa-percent"></i>
-                <h2>Mark Estimater</h2>
+                <h2>Mark Estimator</h2>
             </div>
 
             <div class="input-section">
@@ -1164,8 +1162,8 @@ S.No   Date       TotalHours  Present  Absent
     </div>
 
     <!-- Go to Top Button -->
-    <div class="go-top-btn ">
-        <i class="fas fa-arrow-up "></i>
+    <div class="go-top-btn">
+        <i class="fas fa-arrow-up"></i>
     </div>
 
     <script>
@@ -1192,10 +1190,11 @@ S.No   Date       TotalHours  Present  Absent
                 // Add active class to clicked tab and corresponding calculator
                 btn.classList.add('active');
                 const tabId = btn.getAttribute('data-tab');
-                document.getElementById(`${tabId}-calculator`).classList.add('active');
+                const calculator = document.getElementById(`${tabId}-calculator`);
+                calculator.classList.add('active');
 
                 // Scroll to the calculator
-                document.getElementById(`${tabId}-calculator`).scrollIntoView({
+                calculator.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
@@ -1239,7 +1238,7 @@ S.No   Date       TotalHours  Present  Absent
             }
 
             if (!validInputs) {
-                alert("Please enter valid credits and marks (0-100) for all courses. ");
+                alert("Please enter valid credits and marks (0-100) for all courses.");
                 return;
             }
 
@@ -1247,22 +1246,22 @@ S.No   Date       TotalHours  Present  Absent
             const gpa = totalCredits > 0 ? totalGradePoints / totalCredits : 0;
 
             // Determine classification
-            let classification = " ";
+            let classification = "";
             if (gpa >= 9.0) {
-                classification = "🏆 Gold Medalist! Exceptional performance! ";
+                classification = "🏆 Gold Medalist! Exceptional performance!";
             } else if (gpa >= 7.5) {
-                classification = "🌟 First Class with Distinction! Outstanding achievement! ";
+                classification = "🌟 First Class with Distinction! Outstanding achievement!";
             } else if (gpa >= 6.0) {
-                classification = "👍 First Class! Excellent work! ";
+                classification = "👍 First Class! Excellent work!";
             } else if (gpa >= 5.0) {
-                classification = "📚 Second Class! Keep improving! ";
+                classification = "📚 Second Class! Keep improving!";
             } else {
-                classification = "⚠️ Not eligible for graduation. Please meet with your advisor. ";
+                classification = "⚠️ Not eligible for graduation. Please meet with your advisor.";
             }
 
             // Add warning if any course failed
             if (hasFailed) {
-                classification += " Note: You have failed one or more courses. ";
+                classification += " Note: You have failed one or more courses.";
             }
 
             // Display results
@@ -1307,7 +1306,7 @@ S.No   Date       TotalHours  Present  Absent
             }
 
             if (!validInputs) {
-                alert("Please enter valid GPA and credits for all semesters. ");
+                alert("Please enter valid GPA and credits for all semesters.");
                 return;
             }
 
@@ -1315,9 +1314,9 @@ S.No   Date       TotalHours  Present  Absent
             const cgpa = totalCredits > 0 ? totalWeightedGPA / totalCredits : 0;
 
             // Determine classification
-            let classification = " ";
+            let classification = "";
             if (cgpa >= 9.0) {
-                classification = "🏆 Gold Medalist! You 're an academic superstar!";
+                classification = "🏆 Gold Medalist! You're an academic superstar!";
             } else if (cgpa >= 7.5) {
                 classification = "🌟 First Class with Distinction! Outstanding achievement!";
             } else if (cgpa >= 6.0) {
@@ -1329,25 +1328,25 @@ S.No   Date       TotalHours  Present  Absent
             }
 
             // Display results
-            document.getElementById('cgpa-result ').textContent = cgpa.toFixed(2);
-            document.getElementById('cgpa-classification ').textContent = classification;
-            document.getElementById('cgpa-result-box ').style.display = 'block ';
+            document.getElementById('cgpa-result').textContent = cgpa.toFixed(2);
+            document.getElementById('cgpa-classification').textContent = classification;
+            document.getElementById('cgpa-result-box').style.display = 'block';
 
             // Scroll to results
-            document.getElementById('cgpa-result-box ').scrollIntoView({
-                behavior: 'smooth ',
-                block: 'center '
+            document.getElementById('cgpa-result-box').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
             });
         });
 
         // Mark Estimater
-        document.getElementById('calculate-mark ').addEventListener('click ', function() {
-            const markType = document.querySelector('input[name="mark-type" ]:checked ').value;
-            const cae1 = parseFloat(document.getElementById('cae1 ').value) || 0;
-            const cae2 = parseFloat(document.getElementById('cae2 ').value) || 0;
-            const assignment = parseFloat(document.getElementById('assignment ').value) || 0;
-            const quiz = parseFloat(document.getElementById('quiz ').value) || 0;
-            const attendance = parseFloat(document.getElementById('attendance ').value) || 0;
+        document.getElementById('calculate-mark').addEventListener('click', function() {
+            const markType = document.querySelector('input[name="mark-type"]:checked').value;
+            const cae1 = parseFloat(document.getElementById('cae1').value) || 0;
+            const cae2 = parseFloat(document.getElementById('cae2').value) || 0;
+            const assignment = parseFloat(document.getElementById('assignment').value) || 0;
+            const quiz = parseFloat(document.getElementById('quiz').value) || 0;
+            const attendance = parseFloat(document.getElementById('attendance').value) || 0;
 
             let totalMark = 0;
             let analysis = "";
@@ -1362,42 +1361,42 @@ S.No   Date       TotalHours  Present  Absent
                 if (totalMark < 50) {
                     const needed = (50 - totalMark).toFixed(2);
                     analysis = `⚠️ Need ${needed} more marks to pass (Pass mark is 50)`;
-                    document.getElementById('mark-classification ').className = "classification highlight-fail";
+                    document.getElementById('mark-classification').className = "classification highlight-fail";
                 } else {
                     analysis = "✅ Internal Mark: " + totalMark.toFixed(2);
-                    document.getElementById('mark-classification ').className = "classification highlight-pass";
+                    document.getElementById('mark-classification').className = "classification highlight-pass";
                 }
             } else {
-                const external = parseFloat(document.getElementById('external-mark ').value) || 0;
+                const external = parseFloat(document.getElementById('external-mark').value) || 0;
                 const externalContribution = external / 2;
                 totalMark = caeAvg + assignment + quiz + attendance + externalContribution;
 
                 // Result analysis
                 if (totalMark >= 50) {
                     analysis = "✅ You are passing! Total Mark: " + totalMark.toFixed(2);
-                    document.getElementById('mark-classification ').className = "classification highlight-pass";
+                    document.getElementById('mark-classification').className = "classification highlight-pass";
                 } else {
                     const needed = (50 - totalMark).toFixed(2);
                     analysis = `⚠️ You are failing. Need ${needed} more marks to pass (Pass mark is 50)`;
-                    document.getElementById('mark-classification ').className = "classification highlight-fail";
+                    document.getElementById('mark-classification').className = "classification highlight-fail";
                 }
             }
 
-            document.getElementById('mark-result ').textContent = totalMark.toFixed(2);
-            document.getElementById('mark-classification ').textContent = analysis;
-            document.getElementById('mark-result-box ').style.display = 'block ';
+            document.getElementById('mark-result').textContent = totalMark.toFixed(2);
+            document.getElementById('mark-classification').textContent = analysis;
+            document.getElementById('mark-result-box').style.display = 'block';
 
             // Scroll to results
-            document.getElementById('mark-result-box ').scrollIntoView({
-                behavior: 'smooth ',
-                block: 'center '
+            document.getElementById('mark-result-box').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
             });
         });
 
         // Daily Attendance Estimater
-        document.getElementById('calculate-daily ').addEventListener('click ', function() {
-            const present = parseFloat(document.getElementById('total-present ').value) || 0;
-            const absent = parseFloat(document.getElementById('total-absent ').value) || 0;
+        document.getElementById('calculate-daily').addEventListener('click', function() {
+            const present = parseFloat(document.getElementById('total-present').value) || 0;
+            const absent = parseFloat(document.getElementById('total-absent').value) || 0;
 
             if (present === 0 && absent === 0) {
                 alert("Please enter attendance data.");
@@ -1408,7 +1407,7 @@ S.No   Date       TotalHours  Present  Absent
             const percentage = (present / totalClasses) * 100;
 
             // Update progress bar
-            document.getElementById('daily-progress ').style.width = `${Math.min(percentage, 100)}%`;
+            document.getElementById('daily-progress').style.width = `${Math.min(percentage, 100)}%`;
 
             // Analysis
             let classification = percentage >= 80 ?
@@ -1425,27 +1424,27 @@ S.No   Date       TotalHours  Present  Absent
                 bunkInfo = `You can bunk up to ${bunkable} classes while maintaining 80% attendance.`;
             } else {
                 // Calculate how many classes need to be attended to reach 80%
-                const needed = Math.ceil((0.8 * totalClasses - present) / 0.8);
+                const needed = Math.ceil((0.8 * totalClasses - present) / 0.2);
                 attendInfo = `You need to attend ${needed} more classes to reach 80% attendance.`;
             }
 
-            document.getElementById('daily-percentage ').textContent = percentage.toFixed(2) + '% ';
-            document.getElementById('daily-classification ').textContent = classification;
-            document.getElementById('bunk-info ').textContent = bunkInfo;
-            document.getElementById('attend-info ').textContent = attendInfo;
-            document.getElementById('daily-result-box ').style.display = 'block ';
+            document.getElementById('daily-percentage').textContent = percentage.toFixed(2) + '%';
+            document.getElementById('daily-classification').textContent = classification;
+            document.getElementById('bunk-info').textContent = bunkInfo;
+            document.getElementById('attend-info').textContent = attendInfo;
+            document.getElementById('daily-result-box').style.display = 'block';
 
             // Scroll to results
-            document.getElementById('daily-result-box ').scrollIntoView({
-                behavior: 'smooth ',
-                block: 'center '
+            document.getElementById('daily-result-box').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
             });
         });
 
         // Hourly Attendance Estimater
-        document.getElementById('calculate-hourly ').addEventListener('click ', function() {
-            const data = document.getElementById('attendance-data ').value;
-            const lines = data.split('\n ');
+        document.getElementById('calculate-hourly').addEventListener('click', function() {
+            const data = document.getElementById('attendance-data').value;
+            const lines = data.split('\n');
 
             let totalHours = 0;
             let presentHours = 0;
@@ -1479,7 +1478,7 @@ S.No   Date       TotalHours  Present  Absent
             const percentage = (presentHours / totalHours) * 100;
 
             // Update progress bar
-            document.getElementById('hourly-progress ').style.width = `${Math.min(percentage, 100)}%`;
+            document.getElementById('hourly-progress').style.width = `${Math.min(percentage, 100)}%`;
 
             // Analysis
             let classification = percentage >= 60 ?
@@ -1492,7 +1491,7 @@ S.No   Date       TotalHours  Present  Absent
 
             if (percentage >= 60) {
                 // Calculate how many hours can be bunked while maintaining 60%
-                const bunkable = Math.floor((presentHours - 0.6 * totalHours) / 0.4);
+                const bunkable = Math.floor((presentHours - 0.6 * totalHours) / 0.6);
                 bunkInfo = `You can bunk up to ${bunkable} hours while maintaining 60% attendance.`;
             } else {
                 // Calculate how many hours need to be attended to reach 60%
@@ -1500,26 +1499,26 @@ S.No   Date       TotalHours  Present  Absent
                 attendInfo = `You need to attend ${needed} more hours to reach 60% attendance.`;
             }
 
-            document.getElementById('hourly-percentage ').textContent = percentage.toFixed(2) + '% ';
-            document.getElementById('hourly-classification ').textContent = classification;
-            document.getElementById('hourly-bunk-info ').textContent = bunkInfo;
-            document.getElementById('hourly-attend-info ').textContent = attendInfo;
-            document.getElementById('hourly-result-box ').style.display = 'block ';
+            document.getElementById('hourly-percentage').textContent = percentage.toFixed(2) + '%';
+            document.getElementById('hourly-classification').textContent = classification;
+            document.getElementById('hourly-bunk-info').textContent = bunkInfo;
+            document.getElementById('hourly-attend-info').textContent = attendInfo;
+            document.getElementById('hourly-result-box').style.display = 'block';
 
             // Scroll to results
-            document.getElementById('hourly-result-box ').scrollIntoView({
-                behavior: 'smooth ',
-                block: 'center '
+            document.getElementById('hourly-result-box').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
             });
         });
 
         // Function to generate dynamic inputs based on course/semester count
         function generateInputs() {
             // GPA Course inputs
-            const courseCount = document.getElementById('course-count ');
-            courseCount.addEventListener('change ', function() {
+            const courseCount = document.getElementById('course-count');
+            const handleCourseChange = function() {
                 const count = parseInt(this.value);
-                let html = ' ';
+                let html = '';
 
                 for (let i = 1; i <= count; i++) {
                     html += `
@@ -1537,14 +1536,15 @@ S.No   Date       TotalHours  Present  Absent
                     `;
                 }
 
-                document.getElementById('course-inputs ').innerHTML = html;
-            });
+                document.getElementById('course-inputs').innerHTML = html;
+            };
+            courseCount.addEventListener('change', handleCourseChange);
 
             // CGPA Semester inputs
-            const semesterCount = document.getElementById('semester-count ');
-            semesterCount.addEventListener('change ', function() {
+            const semesterCount = document.getElementById('semester-count');
+            semesterCount.addEventListener('change', function() {
                 const count = parseInt(this.value);
-                let html = ' ';
+                let html = '';
 
                 for (let i = 1; i <= count; i++) {
                     html += `
@@ -1562,19 +1562,19 @@ S.No   Date       TotalHours  Present  Absent
                     `;
                 }
 
-                document.getElementById('semester-inputs ').innerHTML = html;
+                document.getElementById('semester-inputs').innerHTML = html;
             });
 
             // Toggle between internal only and internal+external
-            const markTypeRadios = document.querySelectorAll('input[name="mark-type" ] ');
-            const externalContainer = document.getElementById('external-container ');
+            const markTypeRadios = document.querySelectorAll('input[name="mark-type"]');
+            const externalContainer = document.getElementById('external-container');
 
             markTypeRadios.forEach(radio => {
-                radio.addEventListener('change ', function() {
+                radio.addEventListener('change', function() {
                     if (this.value === "internal-external") {
-                        externalContainer.style.display = 'block ';
+                        externalContainer.style.display = 'block';
                     } else {
-                        externalContainer.style.display = 'none ';
+                        externalContainer.style.display = 'none';
                     }
                 });
             });
@@ -1584,30 +1584,30 @@ S.No   Date       TotalHours  Present  Absent
         generateInputs();
 
         // Go to Top Button
-        const goTopBtn = document.querySelector('.go-top-btn ');
+        const goTopBtn = document.querySelector('.go-top-btn');
 
-        window.addEventListener('scroll ', () => {
+        window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                goTopBtn.classList.add('visible ');
+                goTopBtn.classList.add('visible');
             } else {
-                goTopBtn.classList.remove('visible ');
+                goTopBtn.classList.remove('visible');
             }
         });
 
-        goTopBtn.addEventListener('click ', () => {
+        goTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth '
+                behavior: 'smooth'
             });
         });
 
         // Initialize mark estimator
-        document.querySelectorAll('input[name="mark-type" ] ').forEach(radio => {
-            radio.addEventListener('change ', function() {
+        document.querySelectorAll('input[name="mark-type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
                 if (this.value === "internal-external") {
-                    document.getElementById('external-container ').style.display = 'block ';
+                    document.getElementById('external-container').style.display = 'block';
                 } else {
-                    document.getElementById('external-container ').style.display = 'none ';
+                    document.getElementById('external-container').style.display = 'none';
                 }
             });
         });
