@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Academic Estimator | Sathyabama Institute</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+         :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #ffc107;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --glass-bg: rgba(255, 255, 255, 0.18);
+            --gradient-start: #1a2a6c;
+            --gradient-end: #b21f1f;
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* Header Styles */
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+        
+        header:hover {
+            transform: translateY(-5px);
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            animation: gradientShift 3s infinite alternate;
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            width: 85px;
+            height: 85px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s ease;
+        }
+        
+        .logo:hover {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .institute-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.8px;
+            line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .made-by {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 15px;
+            flex-wrap: nowrap;
+        }
+        
+        .tab-btn {
+            background: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            min-width: 160px;
+            text-align: center;
+            position: relative;
+            z-index: 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .tab-btn.active {
+            background: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+        }
+        /* Calculator Container */
+        
+        .calculator-container {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin-top: 25px;
+            animation: fadeIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+        
+        .calculator-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            animation: gradientShift 3s infinite alternate;
+        }
+        
+        .calculator-container.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) rotateX(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header i {
+            font-size: 3.2rem;
+            margin-right: 22px;
+            color: var(--primary);
+            background: rgba(26, 42, 108, 0.12);
+            width: 85px;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .card-header i:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .card-header h2 {
+            font-size: 2.4rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .formula {
+            background: linear-gradient(135deg, rgba(26, 42, 108, 0.12), rgba(178, 31, 31, 0.12));
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 35px;
+            font-style: italic;
+            text-align: center;
+            border-left: 6px solid var(--primary);
+            font-size: 1.2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+        }
+        /* Input Section */
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 42, 108, 0.2), 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 20px 35px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 800;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 0.8px;
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(255, 255, 255, 0.25);
+            transition: height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: -1;
+        }
+        
+        .btn:hover::after {
+            height: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        }
+        
+        .btn:active {
+            transform: translateY(3px);
+        }
+        /* Results Section */
+        
+        .result-box {
+            background: linear-gradient(135deg, #1a2a6c, #3a4a9c);
+            border-radius: 25px;
+            padding: 40px;
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: none;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+        
+        .result-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--accent);
+            animation: gradientShift 3s infinite alternate;
+        }
+        
+        @keyframes popIn {
+            0% {
+                transform: scale(0.85) translateY(40px) rotateX(15deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateY(0) rotateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .result-box h3 {
+            font-size: 2.4rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        .result-value {
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 25px 0;
+            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(90deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .result-percentage {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 25px 0;
+            color: var(--accent);
+        }
+        
+        .classification {
+            background: rgba(255, 255, 255, 0.18);
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 30px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            line-height: 1.6;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        /* Mark Estimator Specific */
+        
+        .radio-group {
+            margin-bottom: 35px;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            perspective: 800px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(26, 42, 108, 0.15);
+            padding: 20px 35px;
+            border-radius: 18px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .radio-option:hover {
+            background: rgba(26, 42, 108, 0.25);
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .radio-option input[type="radio"] {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            transform: translateZ(10px);
+        }
+        
+        .radio-option label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        
+        .mark-inputs .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .mark-inputs .input-group>div {
+            flex: 1;
+            min-width: 220px;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            padding: 25px;
+            margin-top: 60px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 0.95rem;
+        }
+        
+        footer h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .regulation-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            font-size: 0.9rem;
+        }
+        
+        .regulation-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+        /* Go to Top Button */
+        
+        .go-top-btn {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 65px;
+            height: 65px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(40px);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(5px);
+        }
+        
+        .go-top-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .go-top-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-10px) scale(1.15);
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 992px) {
+            .institute-name {
+                font-size: 2rem;
+            }
+            .logo {
+                width: 75px;
+                height: 75px;
+                font-size: 2.2rem;
+            }
+            .tabs {
+                gap: 12px;
+            }
+            .tab-btn {
+                padding: 14px 25px;
+                font-size: 1.1rem;
+                min-width: 150px;
+            }
+            .result-value {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .institute-name {
+                font-size: 1.8rem;
+            }
+            .logo {
+                width: 65px;
+                height: 65px;
+                font-size: 2rem;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tab-btn {
+                width: 100%;
+                max-width: 320px;
+                padding: 16px;
+            }
+            .calculator-container {
+                padding: 30px 20px;
+            }
+            .result-value {
+                font-size: 3.5rem;
+            }
+            .go-top-btn {
+                bottom: 30px;
+                right: 30px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+            .footer-section {
+                min-width: 100%;
+            }
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .institute-name {
+                font-size: 1.5rem;
+            }
+            .card-header h2 {
+                font-size: 1.8rem;
+            }
+            .result-value {
+                font-size: 3rem;
+            }
+            .radio-option {
+                padding: 15px 20px;
+            }
+        }
+        /* Additional Styles */
+        
+        .section-title {
+            text-align: center;
+            margin: 50px 0 40px;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 120px;
+            height: 6px;
+            background: var(--accent);
+            margin: 20px auto;
+            border-radius: 5px;
+            animation: gradientShift 3s infinite alternate;
+        }
+        
+        .input-info {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .analysis-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .analysis-box h4 {
+            margin-bottom: 18px;
+            color: var(--accent);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        .analysis-box p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        /* Highlight Animation */
+        
+        @keyframes highlight {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .highlight-pass {
+            background: linear-gradient(90deg, rgba(40, 167, 69, 0.3), rgba(255, 255, 255, 0.1), rgba(40, 167, 69, 0.3));
+            background-size: 200% 100%;
+            animation: highlight 2s infinite alternate;
+        }
+        
+        .highlight-fail {
+            background: linear-gradient(90deg, rgba(220, 53, 69, 0.3), rgba(255, 255, 255, 0.1), rgba(220, 53, 69, 0.3));
+            background-size: 200% 100%;
+            animation: highlight 2s infinite alternate;
+        }
+        /* Grade Point Table */
+        
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        
+        .grade-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .grade-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .grade-table tr:nth-child(even) {
+            background-color: rgba(26, 42, 108, 0.05);
+        }
+        
+        .grade-table tr:hover {
+            background-color: rgba(26, 42, 108, 0.1);
+        }
+        /* Enhanced hourly attendance textarea */
+        
+        .hourly-attendance-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .hourly-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .hourly-input {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hourly-textarea {
+            min-height: 200px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 992px) {
+            .hourly-textarea {
+                min-height: 250px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .hourly-textarea {
+                min-height: 300px;
+            }
+        }
+        /* Course group styling */
+        
+        .course-group,
+        .semester-group {
+            background: rgba(26, 42, 108, 0.05);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .course-group:hover,
+        .semester-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        /* New animation */
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        /* Progress bar */
+        
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header with Institute Logo and Name -->
+        <header>
+            <div class="logo-container">
+                <div class="logo pulse">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="institute-name">Sathyabama Estimator</h1>
+                    <p class="made-by">Made by Students for Students</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="gpa">GPA Estimator</button>
+            <button class="tab-btn" data-tab="cgpa">CGPA Estimator</button>
+            <button class="tab-btn" data-tab="mark">Mark Estimator</button>
+            <button class="tab-btn" data-tab="daily">Daily Attendance</button>
+            <button class="tab-btn" data-tab="hourly">Hourly Attendance</button>
+        </div>
+
+        <!-- GPA Estimater -->
+        <div id="gpa-calculator" class="calculator-container active">
+            <div class="card-header">
+                <i class="fas fa-calculator"></i>
+                <h2>Semester GPA Estimater</h2>
+            </div>
+
+            <div class="formula">
+                <p>GPA = Σ (Credit × Grade Point) ÷ Σ Credits</p>
+            </div>
+
+
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="course-count">Number of Courses (1-8):</label>
+                    <select id="course-count">
+                        <option value="1">1 Course</option>
+                        <option value="2">2 Courses</option>
+                        <option value="3">3 Courses</option>
+                        <option value="4">4 Courses</option>
+                        <option value="5">5 Courses</option>
+                        <option value="6">6 Courses</option>
+                        <option value="7">7 Courses</option>
+                        <option value="8">8 Courses</option>
+                    </select>
+                </div>
+
+                <div id="course-inputs">
+                    <!-- Course inputs will be generated here -->
+                    <div class="course-group">
+                        <h3>Course 1</h3>
+                        <div class="input-group">
+                            <label for="course1-credit">Credits:</label>
+                            <input type="number" id="course1-credit" min="1" max="10" step="0.5" placeholder="Enter credits">
+                        </div>
+                        <div class="input-group">
+                            <label for="course1-marks">Marks (0-100):</label>
+                            <input type="number" id="course1-marks" min="0" max="100" step="1" placeholder="Enter marks">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-gpa" class="btn">Estimate GPA</button>
+            </div>
+
+            <div id="gpa-result-box" class="result-box">
+                <h3>Your Semester GPA</h3>
+                <div class="result-value" id="gpa-result">0.00</div>
+                <div class="classification" id="gpa-classification">Classification will appear here</div>
+            </div>
+        </div>
+
+        <!-- CGPA Estimater -->
+        <div id="cgpa-calculator" class="calculator-container">
+            <div class="card-header">
+                <i class="fas fa-chart-line"></i>
+                <h2>Cumulative CGPA Estimater</h2>
+            </div>
+
+            <div class="formula">
+                <p>CGPA = Σ (Credit × Grade Point) ÷ Σ Credits</p>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="semester-count">Number of Semesters (1-20):</label>
+                    <select id="semester-count">
+                        <option value="1">1 Semester</option>
+                        <option value="2">2 Semesters</option>
+                        <option value="3">3 Semesters</option>
+                        <option value="4">4 Semesters</option>
+                        <option value="5">5 Semesters</option>
+                        <option value="6">6 Semesters</option>
+                        <option value="7">7 Semesters</option>
+                        <option value="8">8 Semesters</option>
+                        <option value="9">9 Semesters</option>
+                        <option value="10">10 Semesters</option>
+                        <option value="11">11 Semesters</option>
+                        <option value="12">12 Semesters</option>
+                        <option value="13">13 Semesters</option>
+                        <option value="14">14 Semesters</option>
+                        <option value="15">15 Semesters</option>
+                        <option value="16">16 Semesters</option>
+                    </select>
+                </div>
+
+                <div id="semester-inputs">
+                    <!-- Semester inputs will be generated here -->
+                    <div class="semester-group">
+                        <h3>Semester 1</h3>
+                        <div class="input-group">
+                            <label for="semester1-gpa">GPA (0-10):</label>
+                            <input type="number" id="semester1-gpa" min="0" max="10" step="0.01" placeholder="Enter GPA">
+                        </div>
+                        <div class="input-group">
+                            <label for="semester1-credits">Total Credits:</label>
+                            <input type="number" id="semester1-credits" min="0" step="1" placeholder="Enter credits">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-cgpa" class="btn">Estimate CGPA</button>
+            </div>
+
+            <div id="cgpa-result-box" class="result-box">
+                <h3>Your Cumulative CGPA</h3>
+                <div class="result-value" id="cgpa-result">0.00</div>
+                <div class="classification" id="cgpa-classification">Classification will appear here</div>
+            </div>
+        </div>
+
+        <!-- Mark Estimater -->
+        <div id="mark-calculator" class="calculator-container">
+            <div class="card-header">
+                <i class="fas fa-percent"></i>
+                <h2>Mark Estimater</h2>
+            </div>
+
+            <div class="input-section">
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="internal-only" name="mark-type" value="internal-only" checked>
+                        <label for="internal-only">Estimate Internal Mark Only</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="internal-external" name="mark-type" value="internal-external">
+                        <label for="internal-external">Estimate Internal + External Mark</label>
+                    </div>
+                </div>
+
+                <div class="mark-inputs">
+                    <div class="input-group">
+                        <div>
+                            <label for="cae1">CAE 1 Mark (1-50):</label>
+                            <input type="number" id="cae1" min="0" max="50" placeholder="Enter mark">
+                        </div>
+                        <div>
+                            <label for="cae2">CAE 2 Mark (1-50):</label>
+                            <input type="number" id="cae2" min="0" max="50" placeholder="Enter mark (0 if absent)">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div>
+                            <label for="assignment">Assignment Mark (1-10):</label>
+                            <input type="number" id="assignment" min="0" max="10" placeholder="Enter mark">
+                        </div>
+                        <div>
+                            <label for="quiz">Quiz Mark (1-10):</label>
+                            <input type="number" id="quiz" min="0" max="10" placeholder="Enter mark">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div>
+                            <label for="attendance">Attendance Mark (1-5):</label>
+                            <input type="number" id="attendance" min="0" max="5" placeholder="Enter mark">
+                        </div>
+                        <div id="external-container" style="display: none;">
+                            <label for="external-mark">External Mark (1-100):</label>
+                            <input type="number" id="external-mark" min="0" max="100" placeholder="Enter mark">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-mark" class="btn">Estimate Total Mark</button>
+            </div>
+
+            <div id="mark-result-box" class="result-box">
+                <h3>Your Estimated Total Mark</h3>
+                <div class="result-value" id="mark-result">0</div>
+                <div class="classification" id="mark-classification">Result analysis will appear here</div>
+            </div>
+        </div>
+
+        <!-- Daily Attendance Estimater -->
+        <div id="daily-calculator" class="calculator-container">
+            <div class="card-header">
+                <i class="fas fa-calendar-check"></i>
+                <h2>Daily Attendance Estimater</h2>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="total-present">Total Present:</label>
+                    <input type="number" id="total-present" min="0" placeholder="Enter number of classes attended">
+                </div>
+
+                <div class="input-group">
+                    <label for="total-absent">Total Absent:</label>
+                    <input type="number" id="total-absent" min="0" placeholder="Enter number of classes missed">
+                </div>
+
+                <button id="calculate-daily" class="btn">Calculate Attendance</button>
+            </div>
+
+            <div id="daily-result-box" class="result-box">
+                <h3>Attendance Analysis</h3>
+                <div class="result-percentage" id="daily-percentage">0.00%</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="daily-progress" style="width: 0%;"></div>
+                </div>
+                <div class="classification" id="daily-classification">Analysis will appear here</div>
+
+                <div class="analysis-box">
+                    <h4>Detailed Analysis</h4>
+                    <p id="bunk-info"></p>
+                    <p id="attend-info"></p>
+                    <p><strong>Note:</strong> Minimum 80% attendance required</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hourly Attendance Estimater -->
+        <div id="hourly-calculator" class="calculator-container">
+            <div class="card-header">
+                <i class="fas fa-clock"></i>
+                <h2>Hourly Attendance Estimater</h2>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="attendance-data">Enter Attendance Data:</label>
+                    <textarea id="attendance-data" class="hourly-textarea" placeholder="Enter data in format:
+S.No   Date       TotalHours  Present  Absent
+1      10/06/2025  5           5        0
+2      11/06/2025  5           5        0
+3      12/06/2025  5           5        0
+..."></textarea>
+                    <p class="input-info">Sample format: S.No, Date, TotalHours, Present, Absent (tab or space separated)</p>
+                </div>
+
+                <button id="calculate-hourly" class="btn">Calculate Hourly Attendance</button>
+            </div>
+
+            <div id="hourly-result-box" class="result-box">
+                <h3>Hourly Attendance Analysis</h3>
+                <div class="result-percentage" id="hourly-percentage">0.00%</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="hourly-progress" style="width: 0%;"></div>
+                </div>
+                <div class="classification" id="hourly-classification">Analysis will appear here</div>
+
+                <div class="analysis-box">
+                    <h4>Detailed Analysis</h4>
+                    <p id="hourly-bunk-info"></p>
+                    <p id="hourly-attend-info"></p>
+                    <p><strong>Note:</strong> Minimum 60% attendance required</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Compact Footer -->
+        <footer>
+            <div class="footer-section">
+                <h3>Developer</h3>
+                <div class="developer-card">
+                    <p><strong>Hesinberg</strong></p>
+                    <p>Computer Science Department</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Reach Out</h3>
+                <a href="mailto:ajithramesh2020@gmail.com" class="regulation-btn">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p>
+                    <a href="https://sist.sathyabama.ac.in/website/CGPA%20CONVERSION%20CERTIFICATE.pdf" target="_blank">
+                        <i class="fas fa-book"></i> GPA / CGPA Calculation
+                    </a>
+                </p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Go to Top Button -->
+    <div class="go-top-btn ">
+        <i class="fas fa-arrow-up "></i>
+    </div>
+
+    <script>
+        // Mark to Grade Point conversion function
+        function convertMarksToGrade(marks) {
+            if (marks >= 90) return 10;
+            if (marks >= 80) return 9;
+            if (marks >= 70) return 8;
+            if (marks >= 60) return 7;
+            if (marks >= 50) return 6;
+            return 0;
+        }
+
+        // Tab switching functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const calculators = document.querySelectorAll('.calculator-container');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all tabs and calculators
+                tabBtns.forEach(b => b.classList.remove('active'));
+                calculators.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding calculator
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(`${tabId}-calculator`).classList.add('active');
+
+                // Scroll to the calculator
+                document.getElementById(`${tabId}-calculator`).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // GPA Calculation
+        document.getElementById('calculate-gpa').addEventListener('click', function() {
+            // Get course count
+            const courseCount = parseInt(document.getElementById('course-count').value);
+
+            let totalCredits = 0;
+            let totalGradePoints = 0;
+            let validInputs = true;
+            let hasFailed = false;
+
+            // Loop through each course
+            for (let i = 1; i <= courseCount; i++) {
+                const creditInput = document.getElementById(`course${i}-credit`);
+                const marksInput = document.getElementById(`course${i}-marks`);
+
+                if (!creditInput || !marksInput) continue;
+
+                const credit = parseFloat(creditInput.value) || 0;
+                const marks = parseFloat(marksInput.value) || 0;
+                const grade = convertMarksToGrade(marks);
+
+                // Validate inputs
+                if (credit <= 0 || marks < 0 || marks > 100) {
+                    validInputs = false;
+                    break;
+                }
+
+                // Check if course is failed
+                if (grade === 0 && marks > 0) {
+                    hasFailed = true;
+                }
+
+                totalCredits += credit;
+                totalGradePoints += (credit * grade);
+            }
+
+            if (!validInputs) {
+                alert("Please enter valid credits and marks (0-100) for all courses. ");
+                return;
+            }
+
+            // Calculate GPA
+            const gpa = totalCredits > 0 ? totalGradePoints / totalCredits : 0;
+
+            // Determine classification
+            let classification = " ";
+            if (gpa >= 9.0) {
+                classification = "🏆 Gold Medalist! Exceptional performance! ";
+            } else if (gpa >= 7.5) {
+                classification = "🌟 First Class with Distinction! Outstanding achievement! ";
+            } else if (gpa >= 6.0) {
+                classification = "👍 First Class! Excellent work! ";
+            } else if (gpa >= 5.0) {
+                classification = "📚 Second Class! Keep improving! ";
+            } else {
+                classification = "⚠️ Not eligible for graduation. Please meet with your advisor. ";
+            }
+
+            // Add warning if any course failed
+            if (hasFailed) {
+                classification += " Note: You have failed one or more courses. ";
+            }
+
+            // Display results
+            document.getElementById('gpa-result').textContent = gpa.toFixed(2);
+            document.getElementById('gpa-classification').textContent = classification;
+            document.getElementById('gpa-result-box').style.display = 'block';
+
+            // Scroll to results
+            document.getElementById('gpa-result-box').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        });
+
+        // CGPA Calculation
+        document.getElementById('calculate-cgpa').addEventListener('click', function() {
+            // Get semester count
+            const semesterCount = parseInt(document.getElementById('semester-count').value);
+
+            let totalCredits = 0;
+            let totalWeightedGPA = 0;
+            let validInputs = true;
+
+            // Loop through each semester
+            for (let i = 1; i <= semesterCount; i++) {
+                const gpaInput = document.getElementById(`semester${i}-gpa`);
+                const creditsInput = document.getElementById(`semester${i}-credits`);
+
+                if (!gpaInput || !creditsInput) continue;
+
+                const gpa = parseFloat(gpaInput.value) || 0;
+                const credits = parseFloat(creditsInput.value) || 0;
+
+                // Validate inputs
+                if (gpa < 0 || credits <= 0) {
+                    validInputs = false;
+                    break;
+                }
+
+                totalCredits += credits;
+                totalWeightedGPA += (gpa * credits);
+            }
+
+            if (!validInputs) {
+                alert("Please enter valid GPA and credits for all semesters. ");
+                return;
+            }
+
+            // Calculate CGPA
+            const cgpa = totalCredits > 0 ? totalWeightedGPA / totalCredits : 0;
+
+            // Determine classification
+            let classification = " ";
+            if (cgpa >= 9.0) {
+                classification = "🏆 Gold Medalist! You 're an academic superstar!";
+            } else if (cgpa >= 7.5) {
+                classification = "🌟 First Class with Distinction! Outstanding achievement!";
+            } else if (cgpa >= 6.0) {
+                classification = "👍 First Class! Excellent work!";
+            } else if (cgpa >= 5.0) {
+                classification = "📚 Second Class! Keep working hard!";
+            } else {
+                classification = "⚠️ Not eligible for graduation. Please meet with your advisor.";
+            }
+
+            // Display results
+            document.getElementById('cgpa-result ').textContent = cgpa.toFixed(2);
+            document.getElementById('cgpa-classification ').textContent = classification;
+            document.getElementById('cgpa-result-box ').style.display = 'block ';
+
+            // Scroll to results
+            document.getElementById('cgpa-result-box ').scrollIntoView({
+                behavior: 'smooth ',
+                block: 'center '
+            });
+        });
+
+        // Mark Estimater
+        document.getElementById('calculate-mark ').addEventListener('click ', function() {
+            const markType = document.querySelector('input[name="mark-type" ]:checked ').value;
+            const cae1 = parseFloat(document.getElementById('cae1 ').value) || 0;
+            const cae2 = parseFloat(document.getElementById('cae2 ').value) || 0;
+            const assignment = parseFloat(document.getElementById('assignment ').value) || 0;
+            const quiz = parseFloat(document.getElementById('quiz ').value) || 0;
+            const attendance = parseFloat(document.getElementById('attendance ').value) || 0;
+
+            let totalMark = 0;
+            let analysis = "";
+
+            // Calculate CAE average
+            const caeAvg = (cae1 + cae2) / 4;
+
+            if (markType === "internal-only") {
+                totalMark = caeAvg + assignment + quiz + attendance;
+
+                // Result analysis
+                if (totalMark < 50) {
+                    const needed = (50 - totalMark).toFixed(2);
+                    analysis = `⚠️ Need ${needed} more marks to pass (Pass mark is 50)`;
+                    document.getElementById('mark-classification ').className = "classification highlight-fail";
+                } else {
+                    analysis = "✅ Internal Mark: " + totalMark.toFixed(2);
+                    document.getElementById('mark-classification ').className = "classification highlight-pass";
+                }
+            } else {
+                const external = parseFloat(document.getElementById('external-mark ').value) || 0;
+                const externalContribution = external / 2;
+                totalMark = caeAvg + assignment + quiz + attendance + externalContribution;
+
+                // Result analysis
+                if (totalMark >= 50) {
+                    analysis = "✅ You are passing! Total Mark: " + totalMark.toFixed(2);
+                    document.getElementById('mark-classification ').className = "classification highlight-pass";
+                } else {
+                    const needed = (50 - totalMark).toFixed(2);
+                    analysis = `⚠️ You are failing. Need ${needed} more marks to pass (Pass mark is 50)`;
+                    document.getElementById('mark-classification ').className = "classification highlight-fail";
+                }
+            }
+
+            document.getElementById('mark-result ').textContent = totalMark.toFixed(2);
+            document.getElementById('mark-classification ').textContent = analysis;
+            document.getElementById('mark-result-box ').style.display = 'block ';
+
+            // Scroll to results
+            document.getElementById('mark-result-box ').scrollIntoView({
+                behavior: 'smooth ',
+                block: 'center '
+            });
+        });
+
+        // Daily Attendance Estimater
+        document.getElementById('calculate-daily ').addEventListener('click ', function() {
+            const present = parseFloat(document.getElementById('total-present ').value) || 0;
+            const absent = parseFloat(document.getElementById('total-absent ').value) || 0;
+
+            if (present === 0 && absent === 0) {
+                alert("Please enter attendance data.");
+                return;
+            }
+
+            const totalClasses = present + absent;
+            const percentage = (present / totalClasses) * 100;
+
+            // Update progress bar
+            document.getElementById('daily-progress ').style.width = `${Math.min(percentage, 100)}%`;
+
+            // Analysis
+            let classification = percentage >= 80 ?
+                "✅ You meet the 80% attendance requirement!" :
+                "⚠️ You need to improve your attendance";
+
+            // Calculate bunkable classes
+            let bunkInfo = "";
+            let attendInfo = "";
+
+            if (percentage >= 80) {
+                // Calculate how many classes can be bunked while maintaining 80%
+                const bunkable = Math.floor((present - 0.8 * totalClasses) / 0.8);
+                bunkInfo = `You can bunk up to ${bunkable} classes while maintaining 80% attendance.`;
+            } else {
+                // Calculate how many classes need to be attended to reach 80%
+                const needed = Math.ceil((0.8 * totalClasses - present) / 0.8);
+                attendInfo = `You need to attend ${needed} more classes to reach 80% attendance.`;
+            }
+
+            document.getElementById('daily-percentage ').textContent = percentage.toFixed(2) + '% ';
+            document.getElementById('daily-classification ').textContent = classification;
+            document.getElementById('bunk-info ').textContent = bunkInfo;
+            document.getElementById('attend-info ').textContent = attendInfo;
+            document.getElementById('daily-result-box ').style.display = 'block ';
+
+            // Scroll to results
+            document.getElementById('daily-result-box ').scrollIntoView({
+                behavior: 'smooth ',
+                block: 'center '
+            });
+        });
+
+        // Hourly Attendance Estimater
+        document.getElementById('calculate-hourly ').addEventListener('click ', function() {
+            const data = document.getElementById('attendance-data ').value;
+            const lines = data.split('\n ');
+
+            let totalHours = 0;
+            let presentHours = 0;
+            let absentHours = 0;
+
+            // Skip the header line
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+
+                // Split by space or tab
+                const columns = line.split(/\s+/);
+
+                // We need at least 4 columns: S.No, Date, TotalHours, Present, Absent
+                if (columns.length >= 5) {
+                    const total = parseFloat(columns[2]) || 0;
+                    const present = parseFloat(columns[3]) || 0;
+                    const absent = parseFloat(columns[4]) || 0;
+
+                    totalHours += total;
+                    presentHours += present;
+                    absentHours += absent;
+                }
+            }
+
+            if (totalHours === 0) {
+                alert("Please enter valid attendance data.");
+                return;
+            }
+
+            const percentage = (presentHours / totalHours) * 100;
+
+            // Update progress bar
+            document.getElementById('hourly-progress ').style.width = `${Math.min(percentage, 100)}%`;
+
+            // Analysis
+            let classification = percentage >= 60 ?
+                "✅ You meet the 60% attendance requirement!" :
+                "⚠️ You need to improve your attendance";
+
+            // Calculate bunkable hours
+            let bunkInfo = "";
+            let attendInfo = "";
+
+            if (percentage >= 60) {
+                // Calculate how many hours can be bunked while maintaining 60%
+                const bunkable = Math.floor((presentHours - 0.6 * totalHours) / 0.4);
+                bunkInfo = `You can bunk up to ${bunkable} hours while maintaining 60% attendance.`;
+            } else {
+                // Calculate how many hours need to be attended to reach 60%
+                const needed = Math.ceil((0.6 * totalHours - presentHours) / 0.4);
+                attendInfo = `You need to attend ${needed} more hours to reach 60% attendance.`;
+            }
+
+            document.getElementById('hourly-percentage ').textContent = percentage.toFixed(2) + '% ';
+            document.getElementById('hourly-classification ').textContent = classification;
+            document.getElementById('hourly-bunk-info ').textContent = bunkInfo;
+            document.getElementById('hourly-attend-info ').textContent = attendInfo;
+            document.getElementById('hourly-result-box ').style.display = 'block ';
+
+            // Scroll to results
+            document.getElementById('hourly-result-box ').scrollIntoView({
+                behavior: 'smooth ',
+                block: 'center '
+            });
+        });
+
+        // Function to generate dynamic inputs based on course/semester count
+        function generateInputs() {
+            // GPA Course inputs
+            const courseCount = document.getElementById('course-count ');
+            courseCount.addEventListener('change ', function() {
+                const count = parseInt(this.value);
+                let html = ' ';
+
+                for (let i = 1; i <= count; i++) {
+                    html += `
+                    <div class="course-group">
+                        <h3>Course ${i}</h3>
+                        <div class="input-group">
+                            <label for="course${i}-credit">Credits:</label>
+                            <input type="number" id="course${i}-credit" min="1" max="10" step="0.5" placeholder="Enter credits">
+                        </div>
+                        <div class="input-group">
+                            <label for="course${i}-marks">Marks (0-100):</label>
+                            <input type="number" id="course${i}-marks" min="0" max="100" step="1" placeholder="Enter marks">
+                        </div>
+                    </div>
+                    `;
+                }
+
+                document.getElementById('course-inputs ').innerHTML = html;
+            });
+
+            // CGPA Semester inputs
+            const semesterCount = document.getElementById('semester-count ');
+            semesterCount.addEventListener('change ', function() {
+                const count = parseInt(this.value);
+                let html = ' ';
+
+                for (let i = 1; i <= count; i++) {
+                    html += `
+                    <div class="semester-group">
+                        <h3>Semester ${i}</h3>
+                        <div class="input-group">
+                            <label for="semester${i}-gpa">GPA (0-10):</label>
+                            <input type="number" id="semester${i}-gpa" min="0" max="10" step="0.01" placeholder="Enter GPA">
+                        </div>
+                        <div class="input-group">
+                            <label for="semester${i}-credits">Total Credits:</label>
+                            <input type="number" id="semester${i}-credits" min="0" step="1" placeholder="Enter credits">
+                        </div>
+                    </div>
+                    `;
+                }
+
+                document.getElementById('semester-inputs ').innerHTML = html;
+            });
+
+            // Toggle between internal only and internal+external
+            const markTypeRadios = document.querySelectorAll('input[name="mark-type" ] ');
+            const externalContainer = document.getElementById('external-container ');
+
+            markTypeRadios.forEach(radio => {
+                radio.addEventListener('change ', function() {
+                    if (this.value === "internal-external") {
+                        externalContainer.style.display = 'block ';
+                    } else {
+                        externalContainer.style.display = 'none ';
+                    }
+                });
+            });
+        }
+
+        // Initialize input generation
+        generateInputs();
+
+        // Go to Top Button
+        const goTopBtn = document.querySelector('.go-top-btn ');
+
+        window.addEventListener('scroll ', () => {
+            if (window.pageYOffset > 300) {
+                goTopBtn.classList.add('visible ');
+            } else {
+                goTopBtn.classList.remove('visible ');
+            }
+        });
+
+        goTopBtn.addEventListener('click ', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth '
+            });
+        });
+
+        // Initialize mark estimator
+        document.querySelectorAll('input[name="mark-type" ] ').forEach(radio => {
+            radio.addEventListener('change ', function() {
+                if (this.value === "internal-external") {
+                    document.getElementById('external-container ').style.display = 'block ';
+                } else {
+                    document.getElementById('external-container ').style.display = 'none ';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
